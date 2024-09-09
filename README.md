@@ -1,8 +1,6 @@
 # code_guide_practices
 Coding Guidelines &amp; Practices
 
-[[_TOC_]]
-
 # Coding Guidelines
 ## General
 - PEP 8 Guidelines should be followed  (https://peps.python.org/pep-0008/)
@@ -53,36 +51,55 @@ def function_with_types_in_docstring(param1: int, param2: str) -> bool:
     """
 ```
 
-- *To be discussed: Should we use the vscode extension autoDocstring*
-
 ## Linter
-For the projects, **ruff** (https://docs.astral.sh/ruff/) is used as a linter and formatter. The easiest way to adjust the code automatically is using pre-commit (https://pre-commit.com/). Please follow these steps, to set it up:
-1. Create a `.pre-commit-config.yaml` in the root directory of your project
-```python
-repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.2
-    hooks:
-      # Run the linter
-      - id: ruff
-        args: [ --fix ]
-        types: [python]
-      # Run the formatter.
-      - id: ruff-format
-```
-2. Create a `pyproject.toml` file in the root directory of your project 
-```python
-[tool.ruff]
-line-length = 120
-```
-3. Install pre-commit
-```python
-pip install pre-commit
-pre-commit install
-```
-Note: If both files are already included in the repository, you can skip the first two steps.
+### Option 1
+Flake8 is a popular Python tool for checking code quality, which enforces PEP 8 (Python Enhancement Proposal 8) style guidelines and checks for common programming errors. It integrates the functionality of three tools: PyFlakes, pycodestyle (formerly Pep8), and Ned Batchelder's McCabe script (for complexity checking).
 
-In the future further ruff rules can be added. Moreover, there is a vscode integration for ruff available  (https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff). Please note that the extension does not automatically reformats code.
+<h> Main Features of Flake8: </h>
+
+- PEP 8 Compliance: Ensures that your code adheres to Python's official style guide.
+- Error Detection: Identifies various coding errors like undefined variables, unused imports, etc.
+- Code Complexity Check: Evaluates the McCabe complexity of your functions, warning you if a function is too complex.
+- Customizability: Allows for configuration via setup.cfg, tox.ini, or .flake8 files, where you can ignore specific rules, set maximum line lengths, and more.
+- Extensibility: You can extend Flake8’s capabilities with plugins to add additional checks or customize its behavior.
+<br>
+Typical Flake8 Error Codes
+E: pycodestyle (PEP 8) related errors.
+W: pycodestyle (PEP 8) related warnings.
+F: PyFlakes related errors.
+C: Cyclomatic complexity related errors.
+D: Docstring related errors (if using the flake8-docstrings plugin).
+N: Naming conventions (if using flake8 naming plugin).
+
+```[flake8]
+max-line-length = 88  # Matches Black's line length
+extend-ignore = E203, E501, W503  # Ignore these rules
+exclude = 
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist
+max-complexity = 10  # Set the McCabe complexity threshold
+```
+### Option 2
+Ruff is a fast, multipurpose Python linter that is designed to enforce style, catch errors, and improve code quality. It is designed as an all-in-one tool, combining the functionality of several other linters and code quality tools.
+
+<h> Main Features of Ruff: </h>
+
+- Performance: Ruff is known for its speed, being significantly faster than many other linters due to its Rust-based implementation.
+- Comprehensive Checks: It combines checks from multiple tools like pyflakes, pycodestyle, isort, flake8, and others, all within a single binary.
+- Customizable: Ruff can be tailored to your project’s needs through configuration files, where you can enable or disable specific rules, set line lengths, etc.
+- Auto-fix Capabilities: It can automatically fix certain types of linting issues, making code clean-up easier.
+- Extensibility: Like Flake8, Ruff supports plugins to extend its functionality.
+<br>
+Typical Ruff Error Codes
+F: Errors detected by PyFlakes (e.g., unused imports).
+E/W: Style issues detected by pycodestyle (e.g., line length, indentation).
+I: Import order issues detected by isort.
+R: Errors detected by various plugins like flake8-bugbear, flake8-comprehensions, etc.
+
 
 ## Notebook Guidelines
 - Default indentation in Databricks should be set to 4 blank spaces.
@@ -122,7 +139,7 @@ Questions/to do: What was are the main results?
 Questions/to do: What is the conclusion? Provide a summary.
 ``` 
 
-# Repository Guidelines
+## Repository Guidelines
 
 *Idea: Add an example structure for a repository*
 - For every project a `requirements.txt`/environment file should be available. This file should include all the package versions. 
@@ -131,7 +148,7 @@ Questions/to do: What is the conclusion? Provide a summary.
 **bug/**_<bug_id>_**_**_<descriptive_name>_
 ex: **feature/**_24500_plot_consumption_
 
-# Review Guidelines 
+## Review Guidelines 
 - Review should always be conducted by someone else than the implementer.
 - Review should be conducted in "isolation" from the implementer and only when issues arise should an alignment call be arranged.
 - Implementer has added task "Implemented by [Name]"

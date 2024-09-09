@@ -14,8 +14,8 @@ Note: *mypy* can be used to check type hints
 
   Example:
   ```python
-  def add(a: float, b: float) -> float:
-      return a + b
+  def multiply(X: float, Y: float) -> float:
+      return X * Y
   ```
  
 ## Docstrings
@@ -99,6 +99,14 @@ F: Errors detected by PyFlakes (e.g., unused imports).
 E/W: Style issues detected by pycodestyle (e.g., line length, indentation).
 I: Import order issues detected by isort.
 R: Errors detected by various plugins like flake8-bugbear, flake8-comprehensions, etc.
+
+```[tool.ruff]
+line-length = 88  # Consistent with Black's line length
+select = ["F", "E", "W", "I", "B", "C", "R"]  # Enable specific rule categories
+ignore = ["E203", "E501"]  # Ignore specific rules
+exclude = ["docs/", "tests/", "build/"]
+fix = true  # Enable auto-fixing of issues
+```
 
 
 ## Notebook Guidelines

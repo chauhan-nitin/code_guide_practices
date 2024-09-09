@@ -63,13 +63,13 @@ Flake8 is a popular Python tool for checking code quality, which enforces PEP 8 
 - Customizability: Allows for configuration via setup.cfg, tox.ini, or .flake8 files, where you can ignore specific rules, set maximum line lengths, and more.
 - Extensibility: You can extend Flake8’s capabilities with plugins to add additional checks or customize its behavior.
 <br>
-Typical Flake8 Error Codes
-E: pycodestyle (PEP 8) related errors.
-W: pycodestyle (PEP 8) related warnings.
-F: PyFlakes related errors.
-C: Cyclomatic complexity related errors.
-D: Docstring related errors (if using the flake8-docstrings plugin).
-N: Naming conventions (if using flake8 naming plugin).
+Typical Flake8 Error Codes: <br>
+- E: pycodestyle (PEP 8) related errors.
+- W: pycodestyle (PEP 8) related warnings.
+- F: PyFlakes related errors.
+- C: Cyclomatic complexity related errors.
+- D: Docstring related errors (if using the flake8-docstrings plugin).
+- N: Naming conventions (if using flake8 naming plugin).
 
 ```[flake8]
 max-line-length = 88  # Matches Black's line length
@@ -94,11 +94,11 @@ Ruff is a fast, multipurpose Python linter that is designed to enforce style, ca
 - Auto-fix Capabilities: It can automatically fix certain types of linting issues, making code clean-up easier.
 - Extensibility: Like Flake8, Ruff supports plugins to extend its functionality.
 <br>
-Typical Ruff Error Codes
-F: Errors detected by PyFlakes (e.g., unused imports).
-E/W: Style issues detected by pycodestyle (e.g., line length, indentation).
-I: Import order issues detected by isort.
-R: Errors detected by various plugins like flake8-bugbear, flake8-comprehensions, etc.
+Typical Ruff Error Codes: <br>
+- F: Errors detected by PyFlakes (e.g., unused imports).
+- E/W: Style issues detected by pycodestyle (e.g., line length, indentation).
+- I: Import order issues detected by isort.
+- R: Errors detected by various plugins like flake8-bugbear, flake8-comprehensions, etc.
 
 ```[tool.ruff]
 line-length = 88  # Consistent with Black's line length
